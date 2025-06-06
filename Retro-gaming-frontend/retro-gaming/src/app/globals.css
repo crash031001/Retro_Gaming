@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  font-family: Poppins;
+}
+.linearEffect{
+    position: relative;
+    cursor: pointer;
+}
+.linearEffect::after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 0;
+    margin: 0 auto;
+    transition: width 0.3s ease;
+}
+.linearEffect:hover::after {
+    width: 100%;
+}
+.buyNow:hover .PosterImg{
+  opacity: 45;
+}
+
+.PosterContainer:hover .buyNow {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.PosterContainer:hover .PosterImg {
+  opacity: 0.45;
+}
