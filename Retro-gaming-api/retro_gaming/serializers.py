@@ -13,6 +13,11 @@ class JuegosSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('El nombre debe tener al menos 3 caracteres')
         return value.strip()
     
+    def validate_DESCRIPCION(self, value):
+        if value == '':
+            raise serializers.ValidationError('La descripcion no puede estar vacia')
+        return value
+    
     def validate_CANT_JUGADORES(self, value):
         if not value.isdigit():
             raise serializers.ValidationError('La cantidad debe ser un numero')
@@ -28,7 +33,13 @@ class JuegosSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("El peso debe ser mayor a 0")
         return value  
      except ValueError:
-        raise serializers.ValidationError("Formato inválido. Use números (ej: 5, 7.5 o 3,14)")  
+        raise serializers.ValidationError("Formato inválido. Use números (ej: 5, 7.5 o 3,14)") 
+    
+    def validate_GENERO(self, value):
+       if value == '':
+           raise serializers.ValidationError("Es necesario un genero")
+       return value
+         
     
     def validate_FECHA(self, value):
         if value > date.today():

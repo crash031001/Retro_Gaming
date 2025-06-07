@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class JUEGOS(models.Model):
     NOMBRE = models.CharField(max_length=250)
-    DESCRIPCION = models.TextField(default="")
+    DESCRIPCION = models.TextField()
     IMAGEN = models.TextField(default="")
     CANT_JUGADORES = models.CharField(max_length=2)
     PESO = models.CharField(max_length=10)
