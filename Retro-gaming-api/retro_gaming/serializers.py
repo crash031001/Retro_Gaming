@@ -1,6 +1,12 @@
 from rest_framework import serializers
 from .models import JUEGOS
 from datetime import date
+from django.contrib.auth.models import User
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'password']
 
 class JuegosSerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,11 +18,6 @@ class JuegosSerializer(serializers.ModelSerializer):
         if len(value.strip()) < 3:
             raise serializers.ValidationError('El nombre debe tener al menos 3 caracteres')
         return value.strip()
-    
-    def validate_DESCRIPCION(self, value):
-        if value == '':
-            raise serializers.ValidationError('La descripcion no puede estar vacia')
-        return value
     
     def validate_CANT_JUGADORES(self, value):
         if not value.isdigit():
@@ -33,13 +34,7 @@ class JuegosSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("El peso debe ser mayor a 0")
         return value  
      except ValueError:
-        raise serializers.ValidationError("Formato inválido. Use números (ej: 5, 7.5 o 3,14)") 
-    
-    def validate_GENERO(self, value):
-       if value == '':
-           raise serializers.ValidationError("Es necesario un genero")
-       return value
-         
+        raise serializers.ValidationError("Formato inválido. Use números (ej: 5, 7.5 o 3,14)")  
     
     def validate_FECHA(self, value):
         if value > date.today():
